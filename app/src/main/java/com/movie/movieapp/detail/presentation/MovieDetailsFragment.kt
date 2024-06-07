@@ -3,6 +3,7 @@ package com.movie.movieapp.detail.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.api.load
 import com.movie.movieapp.R
@@ -18,6 +19,15 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMovieDetailsBinding.bind(view)
         setDataToUi()
+        setListeners()
+    }
+
+    private fun setListeners(){
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     private fun setDataToUi() {
