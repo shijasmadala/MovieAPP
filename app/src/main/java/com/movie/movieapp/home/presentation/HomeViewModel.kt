@@ -22,14 +22,16 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 
     private fun getMovieData() = viewModelScope.launch {
         homeRepository.getMovieData().collectLatest { homeData ->
-            when(homeData){
+            when (homeData) {
                 is Resource.Empty -> {}
                 is Resource.Error -> {
                     _homeState.emit(HomeUiState.Error(homeData.error))
                 }
+
                 Resource.Loading -> {
                     _homeState.emit(HomeUiState.Loading)
                 }
+
                 is Resource.Success -> {
                     _homeState.emit(HomeUiState.Success(homeData.value))
                 }

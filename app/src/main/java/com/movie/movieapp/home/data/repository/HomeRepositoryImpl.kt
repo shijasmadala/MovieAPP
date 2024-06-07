@@ -1,10 +1,10 @@
 package com.movie.movieapp.home.data.repository
 
-import com.movie.movieapp.utils.Resource
-import com.movie.movieapp.utils.Constants
 import com.movie.movieapp.home.data.dto.MovieResponseDto
 import com.movie.movieapp.home.data.source.HomeService
 import com.movie.movieapp.home.domain.repository.HomeRepository
+import com.movie.movieapp.utils.Constants
+import com.movie.movieapp.utils.Resource
 import com.skydoves.sandwich.StatusCode
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
@@ -19,7 +19,7 @@ class HomeRepositoryImpl @Inject constructor(private val homeService: HomeServic
         emit(Resource.Loading)
         homeService.getMovieData().suspendOnSuccess {
             val response = this.data
-            if (response != null){
+            if (response != null) {
                 emit(Resource.Success(response))
             }
         }.suspendOnError {

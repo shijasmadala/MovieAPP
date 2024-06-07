@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) , MovieAdapter.OnMovieItemClick {
+class HomeFragment : Fragment(R.layout.fragment_home), MovieAdapter.OnMovieItemClick {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<HomeViewModel>()
     private val genreAdapter by lazy { GenreAdapter(this) }
@@ -36,19 +36,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) , MovieAdapter.OnMovieItem
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.homeState.collectLatest { homeData ->
-                    when(homeData) {
+                    when (homeData) {
                         is HomeUiState.Empty -> {
 
                         }
+
                         is HomeUiState.Error -> {
-                            Toast.makeText(requireContext(), homeData.message, Toast.LENGTH_SHORT).show()
-                            LoadingScreen.operateDialog(false,requireContext())
+                            Toast.makeText(requireContext(), homeData.message, Toast.LENGTH_SHORT)
+                                .show()
+                            LoadingScreen.operateDialog(false, requireContext())
                         }
+
                         is HomeUiState.Loading -> {
-                            LoadingScreen.operateDialog(true,requireContext())
+                            LoadingScreen.operateDialog(true, requireContext())
                         }
+
                         is HomeUiState.Success -> {
-                            LoadingScreen.operateDialog(false,requireContext())
+                            LoadingScreen.operateDialog(false, requireContext())
                             genreAdapter.submitList(homeData.movieData.homeData)
                         }
                     }
@@ -58,12 +62,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) , MovieAdapter.OnMovieItem
     }
 
     override fun onMovieItemClick(movie: MovieItem) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(
-            movieImageUrl = movie.posterurl,
-            title = movie.title,
-            content = movie.desc,
-            rating = movie.rating,
-            releaseDate = movie.release
-        ))
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(
+                movieImageUrl = movie.posterurl,
+                title = movie.title,
+                content = movie.desc,
+                rating = movie.rating,
+                releaseDate = movie.release
+            )
+        )
     }
 }

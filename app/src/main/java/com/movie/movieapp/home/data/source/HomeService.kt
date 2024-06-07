@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface HomeService {
     @GET("dummy.json")
-    suspend fun getMovieData() : ApiResponse<MovieResponseDto>
+    suspend fun getMovieData(): ApiResponse<MovieResponseDto>
 }

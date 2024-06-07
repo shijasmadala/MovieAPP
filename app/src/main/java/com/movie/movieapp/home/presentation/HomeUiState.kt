@@ -1,6 +1,5 @@
 package com.movie.movieapp.home.presentation
 
-import com.movie.movieapp.home.data.dto.HomeData
 import com.movie.movieapp.home.data.dto.MovieResponseDto
 
 sealed class HomeUiState {

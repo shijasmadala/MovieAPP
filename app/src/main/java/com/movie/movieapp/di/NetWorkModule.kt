@@ -5,7 +5,6 @@ import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,7 +48,7 @@ class NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideHomeService(retrofit: Retrofit) : HomeService {
+    fun provideHomeService(retrofit: Retrofit): HomeService {
         return retrofit.create()
     }
 }

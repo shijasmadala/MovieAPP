@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.movie.movieapp.databinding.ItemGenereBinding
 import com.movie.movieapp.home.data.dto.HomeData
 
-class GenreAdapter(private val itemClick : MovieAdapter.OnMovieItemClick) : ListAdapter<HomeData, RecyclerView.ViewHolder>(DiffCallBack) {
+class GenreAdapter(private val itemClick: MovieAdapter.OnMovieItemClick) :
+    ListAdapter<HomeData, RecyclerView.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = ItemGenereBinding.inflate(LayoutInflater.from(parent.context) , parent ,false)
+        val binding = ItemGenereBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GenreViewHolder(binding)
     }
 
@@ -19,18 +20,18 @@ class GenreAdapter(private val itemClick : MovieAdapter.OnMovieItemClick) : List
         (holder as GenreViewHolder).bind(getItem(position))
     }
 
-    private inner class GenreViewHolder(private val binding: ItemGenereBinding)
-        : RecyclerView.ViewHolder(binding.root){
-            fun bind(homeData: HomeData){
-                val movieAdapter = MovieAdapter(itemClick)
-                binding.apply {
-                    count.text = homeData.id.plus(".")
-                    title.text = homeData.genre
-                    recyclerView.adapter = movieAdapter
-                    movieAdapter.submitList(homeData.movieslist)
-                }
+    private inner class GenreViewHolder(private val binding: ItemGenereBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(homeData: HomeData) {
+            val movieAdapter = MovieAdapter(itemClick)
+            binding.apply {
+                count.text = homeData.id.plus(".")
+                title.text = homeData.genre
+                recyclerView.adapter = movieAdapter
+                movieAdapter.submitList(homeData.movieslist)
             }
         }
+    }
 }
 
 object DiffCallBack : DiffUtil.ItemCallback<HomeData>() {
